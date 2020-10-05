@@ -7,15 +7,36 @@
 для пальто (V/6.5 + 0.5), для костюма (2*H + 0.3). Проверить работу этих методов на реальных данных.
 Реализовать общий подсчет расхода ткани. Проверить на практике полученные на этом уроке знания:
 реализовать абстрактные классы для основных классов проекта, проверить на практике работу декоратора @property."""
+from abc import ABC, abstractmethod
 
 
-class Clothes:
-    pass
+class Clothes(ABC):
+    def __init__(self, param):
+        self.param = param
+
+    @property
+    @abstractmethod
+    def consumption(self):
+        pass
+
+    def __add__(self, other):
+        return f'Всего ткани необходимо: {(self.consumption + other.consumption):.2f}'
 
 
 class Suit(Clothes):
-    pass
+    @property
+    def consumption(self):
+        print(f'Ткани на пальто необходимо: {round(self.param / 6.5) + 0.5}')
+        return round(self.param / 6.5) + 0.5
 
 
 class Coat(Clothes):
-    pass
+    @property
+    def consumption(self):
+        print(f'Ткани на костюм необходимо: {((2 * self.param + 0.3) / 100):.2f}')
+        return (2 * self.param + 0.3) / 100
+
+
+coat = Coat(42)
+suit = Suit(170)
+print(coat + suit)

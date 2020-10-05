@@ -25,7 +25,13 @@ class Matrix:
         return count
 
     def __add__(self, other):
-        pass
+        matrix_list = []
+        for i in range(len(self.matrix)):
+            matrix_list.append([])
+            for j in range(len(self.matrix[0])):
+                matrix_list[i].append(self.matrix[i][j] + other.matrix[i][j])
+        return Matrix(matrix_list)
+
 
 matrix_1 = Matrix([[31, 22], [37, 43], [51, 86]])
 matrix_2 = Matrix([[3, 5, 32], [2, 4, 6], [-1, 64, -8]])
@@ -34,4 +40,4 @@ matrix_3 = Matrix([[3, 5, 8], [8, 3, 7]])
 print(matrix_1)
 print(matrix_2)
 print(matrix_3)
-# print(matrix_1 + matrix_2)
+print(matrix_1 + matrix_2)
